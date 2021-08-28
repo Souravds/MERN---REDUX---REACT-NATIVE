@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { actionOnStatus } from '../actions';
+import { actionOnStatus, fetchName } from '../actions';
 
 function Profile() {
     //GRAB DATA FROM STORE BY useSelector
@@ -18,14 +18,8 @@ function Profile() {
     }
 
     //UPDATE_NAME
-    const updateName = async () => {
-        const res = await fetch('https://jsonplaceholder.typicode.com/users')
-        const results = await res.json()
-
-        dispatch({
-            type: 'UPDATE_NAME',
-            payload: results[0].name
-        })    
+    const updateName = () => {
+        dispatch(fetchName())    
     }
 
     //UPDATE STATUS BY createAction
