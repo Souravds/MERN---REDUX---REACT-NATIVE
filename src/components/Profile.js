@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateAge, updateName, updateStatus } from '../reducers/userReducer';
+import { fetchUsers, updateAge, updateStatus } from '../reducers/userReducer';
 
 function Profile() {
     //GRAB DATA FROM STORE BY useSelector
@@ -10,8 +10,9 @@ function Profile() {
     const dispatch = useDispatch()
 
     //UPDATE_NAME
-    const updateReqName = (name) => {
-        dispatch(updateName(name))     
+    const updateReqName = () => {
+        //CALL THE 'fetchUsers' extraReducers
+        dispatch(fetchUsers())     
     }
     
     //UPDATE AGE
@@ -29,8 +30,8 @@ function Profile() {
             <h6>I am { age } years old</h6>
             <h6>And I am a { status }</h6>
             <button onClick={() => {
+                updateReqName(); 
                 updateReqAge(70); 
-                updateReqName('sourav'); 
                 updateReqStatus('gaming')
             }}>update</button>
         </div>
