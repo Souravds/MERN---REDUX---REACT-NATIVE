@@ -1,30 +1,27 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { actionOnStatus, fetchName } from '../actions';
+import { updateAge, updateName, updateStatus } from '../reducers/userReducer';
 
 function Profile() {
     //GRAB DATA FROM STORE BY useSelector
     const {name, age, status} = useSelector(state => state)
 
-    //MODIFICATION INTO THE STORE BY useDispatch 
+    //DISPATCH FROM USER DATA MODIFICATION
     const dispatch = useDispatch()
-    
-    //UPDATE AGE
-    const updateAge = (age) => {
-        dispatch({
-            type: 'UPDATE_AGE',
-            payload: age
-        })
-    }
 
     //UPDATE_NAME
-    const updateName = () => {
-        dispatch(fetchName())    
+    const updateReqName = (name) => {
+        dispatch(updateName(name))     
+    }
+    
+    //UPDATE AGE
+    const updateReqAge = (age) => {
+        dispatch(updateAge(age))
     }
 
-    //UPDATE STATUS BY createAction
-    const updateStatus = (status) => {
-        dispatch(actionOnStatus(status))
+    //UPDATE STATUS
+    const updateReqStatus = (status) => {
+        dispatch(updateStatus(status))
     }
     return (
         <div>
@@ -32,9 +29,9 @@ function Profile() {
             <h6>I am { age } years old</h6>
             <h6>And I am a { status }</h6>
             <button onClick={() => {
-                updateAge(70); 
-                updateName(); 
-                updateStatus('gaming')
+                updateReqAge(70); 
+                updateReqName('sourav'); 
+                updateReqStatus('gaming')
             }}>update</button>
         </div>
     )

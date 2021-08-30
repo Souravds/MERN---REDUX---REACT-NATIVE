@@ -1,5 +1,4 @@
-import { createReducer } from '@reduxjs/toolkit';
-import { actionOnStatus } from '../actions';
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     name: 'sad',
@@ -7,34 +6,25 @@ const initialState = {
     status: 'coder'
   }
 
-//REDUX-TOOLKIT WAY
-export default createReducer(initialState, (builder) => {
-    //UPDATE AGE
-    builder.addCase('UPDATE_AGE',(state, action) => {
-        state.age = action.payload
-    })
+//creteSclice minimized the reducer and action in a file
+const userSlice = createSlice({
+    name: 'person',
+    initialState,
+    reducers: {
+        updateName(state,action){
+            state.name = action.payload
+        },
 
-    //UPDATE NAME
-    builder.addCase('UPDATE_NAME', (state, action) => {
-        state.name = action.payload
-    })
+        updateAge(state, action){
+            state.age = action.payload
+        },
 
-    //UPDATE STATUS
-    builder.addCase(actionOnStatus, (state, action) => {
-        state.status = action.payload
-    })
+        updateStatus(state, action){
+            state.status = action.payload
+        }
+    }
 })
 
+export const { updateName, updateAge, updateStatus } = userSlice.actions
 
-//REDUX WAY
-// const userReducer = (state = initialState, action)  => {
-//     if(action.type === 'CHANGE_NAME'){
-//         return{
-//             ...state,
-//             age: action.payload
-//         }
-//     }
-//     return state
-// }
-
-// export default userReducer
+export default userSlice.reducer

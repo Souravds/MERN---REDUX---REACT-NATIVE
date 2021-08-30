@@ -10,7 +10,6 @@ import reportWebVitals from './reportWebVitals';
 
 const  store = configureStore({
   reducer: userReducer
-
 })
 
 ReactDOM.render(
